@@ -58,7 +58,7 @@ if __name__ == '__main__':
 	print("month2 is =" + month2) 
 	print("year2 is =" + str(year2))     
 	
-	imon = int(2)
+	imon = int(sys.argv[1])
 	if imon <12:
 		end_time=year+'-'+month2
 	else:
