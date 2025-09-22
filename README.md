@@ -21,6 +21,6 @@ All simulations ran with the Pan-Antarcitc model (MOM6-SIS2 regional, northern b
 
 
 ### Future direction
-The continental shelf seem to have very low sensitivity to changes in resolution, which discourage us to pursue changes in CSHT as the direction of our paper. Heat transport offshore and sea ice extent seem to be much more senssitive to resolution refinement. Thse offshore changes could likely be explained by a richer mesoscale field in higher resolution, bringing more heat to the sea ice border, and enhancing the vertical mixing of warm CDW with surface water. This enhanced mixing could be driving the sea ice decrease. *The question is: how obvious or interesting  this eddy-heat transport - sea ice changes are? Are they worth publication?* 
+The continental shelf seem to have very low sensitivity to changes in resolution, which discourage us to pursue changes in CSHT as the direction of our paper. Heat transport offshore and sea ice extent seem to be much more senssitive to resolution refinement. These offshore changes could likely be explained by a richer mesoscale field in higher resolution, bringing more heat to the sea ice border, and enhancing the vertical mixing of warm CDW with surface water. This enhanced mixing could be driving the sea ice decrease. *The question is: how obvious or interesting  this eddy-heat transport - sea ice changes are? Are they worth publication?* 
 
    
