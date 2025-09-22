@@ -4,7 +4,7 @@
 *PS: The initial focus was on the heat transport across the continental slope. However, changes in cross-slope heat transport with resolution are quite small, and therefore the focus will likely shift to larger differences offshore*
 
 ### Simulations
-All simulations ran with the Pan-Antarcitc model (MOM6-SIS2 regional, northern boundary at $37^oS$. Horizontal resolutions of 1/10th ($0.1^o$), 1/20th ($0.05^o$) and 1/40th ($0.0025^o$). Forced using repeated year forcing approach. Northern boundary forced with the year 2 of ACCESS-OM2-01 ryf conditions at $37^oS$.
+All simulations ran with the Pan-Antarcitc model (MOM6-SIS2 regional, northern boundary at $37^oS$. Horizontal resolutions of 1/10th ($0.1^o$), 1/20th ($0.05^o$) and 1/40th ($0.025^o$). Forced using repeated year forcing approach. Northern boundary forced with the year 2 of ACCESS-OM2-01 ryf conditions at $37^oS$.
 
 
 ### Summary of current results
