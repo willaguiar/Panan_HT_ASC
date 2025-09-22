@@ -20,6 +20,7 @@ All simulations ran with the Pan-Antarcitc model (MOM6-SIS2 regional, northern b
     - In the higher resolution simulations there is more heat convergence below the sea ice (https://github.com/willaguiar/Panan_HT_ASC/issues/8#issuecomment-3310776641). Assuming conservation, this higher concentration of heat likely increases vertical heat fluxes under sea ice, further melting it and reducing SIE and SIT
 
 
-
+### Future direction
+The continental shelf seem to have very low sensitivity to changes in resolution, which discourage us to pursue changes in CSHT as the direction of our paper. Heat transport offshore and sea ice extent seem to be much more senssitive to resolution refinement. Thse offshore changes could likely be explained by a richer mesoscale field in higher resolution, bringing more heat to the sea ice border, and enhancing the vertical mixing of warm CDW with surface water. This enhanced mixing could be driving the sea ice decrease. *The question is: how obvious or interesting  this eddy-heat transport - sea ice changes are? Are they worth publication?* 
 
    
