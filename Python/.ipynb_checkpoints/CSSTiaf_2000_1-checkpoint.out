@@ -1,0 +1,89 @@
+2000-01-01
+2000-01-31
+Start date =2000-01
+month2 is =02
+year2 is =2001
+End date =2000-02
+importing isobath mask
+importing daily mass transports and salinities
+Lets fitst do some dimension checking
+SalU_daily = 
+<xarray.DataArray 'so' (time: 31, z_l_sub01: 51, yh: 510, xq: 3601)>
+dask.array<chunked_aware_interpnd, shape=(31, 51, 510, 3601), dtype=float32, chunksize=(1, 11, 510, 3601), chunktype=numpy.ndarray>
+Coordinates:
+  * yh         (yh) float64 -81.11 -81.07 -81.02 -80.98 ... -59.14 -59.08 -59.03
+  * z_l_sub01  (z_l_sub01) float64 0.5413 1.681 2.94 ... 1.333e+03 1.453e+03
+  * time       (time) object 2000-01-01 12:00:00 ... 2000-01-31 12:00:00
+    xh         (xq) float64 -280.0 -279.9 -279.8 -279.7 ... 79.7 79.8 79.9 80.0
+  * xq         (xq) float64 -280.0 -279.9 -279.8 -279.7 ... 79.7 79.8 79.9 80.0
+Attributes:
+    units:          psu
+    long_name:      Sea Water Salinity
+    cell_methods:   area:mean z_l:mean yh:mean xh:mean time: mean
+    cell_measures:  volume: volcello area: areacello
+    time_avg_info:  average_T1,average_T2,average_DT
+    standard_name:  sea_water_salinity
+    ncfiles:        ['/g/data/ik11/outputs/mom6-panan/panant-01-zstar-ACCESSy...
+SalV_daily = 
+<xarray.DataArray 'so' (time: 31, z_l_sub01: 51, yq: 511, xh: 3600)>
+dask.array<transpose, shape=(31, 51, 511, 3600), dtype=float32, chunksize=(1, 11, 511, 3600), chunktype=numpy.ndarray>
+Coordinates:
+  * xh         (xh) float64 -279.9 -279.8 -279.7 -279.6 ... 79.75 79.85 79.95
+  * z_l_sub01  (z_l_sub01) float64 0.5413 1.681 2.94 ... 1.333e+03 1.453e+03
+  * time       (time) object 2000-01-01 12:00:00 ... 2000-01-31 12:00:00
+    yh         (yq) float64 -81.13 -81.09 -81.05 -81.0 ... -59.11 -59.06 -59.01
+  * yq         (yq) float64 -81.13 -81.09 -81.05 -81.0 ... -59.11 -59.06 -59.01
+Attributes:
+    units:          psu
+    long_name:      Sea Water Salinity
+    cell_methods:   area:mean z_l:mean yh:mean xh:mean time: mean
+    cell_measures:  volume: volcello area: areacello
+    time_avg_info:  average_T1,average_T2,average_DT
+    standard_name:  sea_water_salinity
+    ncfiles:        ['/g/data/ik11/outputs/mom6-panan/panant-01-zstar-ACCESSy...
+DztU = 
+<xarray.DataArray (time: 31, z_l_sub01: 51, yh: 845, xq: 3601)>
+dask.array<chunked_aware_interpnd, shape=(31, 51, 845, 3601), dtype=float32, chunksize=(1, 11, 845, 3601), chunktype=numpy.ndarray>
+Coordinates:
+  * yh         (yh) float64 -81.11 -81.07 -81.02 -80.98 ... -37.3 -37.22 -37.14
+  * z_l_sub01  (z_l_sub01) float64 0.5413 1.681 2.94 ... 1.333e+03 1.453e+03
+  * time       (time) object 2000-01-01 12:00:00 ... 2000-01-31 12:00:00
+    xh         (xq) float64 -280.0 -279.9 -279.8 -279.7 ... 79.7 79.8 79.9 80.0
+  * xq         (xq) float64 -280.0 -279.9 -279.8 -279.7 ... 79.7 79.8 79.9 80.0
+DztV = 
+<xarray.DataArray (time: 31, z_l_sub01: 51, yq: 511, xh: 3600)>
+dask.array<transpose, shape=(31, 51, 511, 3600), dtype=float32, chunksize=(1, 11, 511, 3600), chunktype=numpy.ndarray>
+Coordinates:
+  * xh         (xh) float64 -279.9 -279.8 -279.7 -279.6 ... 79.75 79.85 79.95
+  * z_l_sub01  (z_l_sub01) float64 0.5413 1.681 2.94 ... 1.333e+03 1.453e+03
+  * time       (time) object 2000-01-01 12:00:00 ... 2000-01-31 12:00:00
+    yh         (yq) float64 -81.13 -81.09 -81.05 -81.0 ... -59.11 -59.06 -59.01
+  * yq         (yq) float64 -81.13 -81.09 -81.05 -81.0 ... -59.11 -59.06 -59.01
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0
+0.3.0

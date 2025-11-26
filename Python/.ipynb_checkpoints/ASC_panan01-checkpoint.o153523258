@@ -1,0 +1,14 @@
+Job 153523258.gadi-pbs killed due to exceeding jobfs quota. Quota: 100.0MB, Used: 456.65MB, Host: gadi-cpu-clx-2554
+
+======================================================================================
+                  Resource Usage on 2025-10-28 10:10:34:
+   Job Id:             153523258.gadi-pbs
+   Project:            ol01
+   Exit Status:        271 (Linux Signal 15 SIGTERM Termination)
+   Service Units:      3.15
+   NCPUs Requested:    48                     NCPUs Used: 48              
+                                           CPU Time Used: 00:16:35        
+   Memory Requested:   190.0GB               Memory Used: 37.09GB         
+   Walltime requested: 01:30:00            Walltime Used: 00:01:58        
+   JobFS requested:    100.0MB                JobFS used: 468.9MB         
+======================================================================================

@@ -1,0 +1,8 @@
+find: cannot delete ‘/scratch/oz91/wf4500/Trash_bin/wf4500/access-om2/work’: Directory not empty
+find: cannot delete ‘/scratch/oz91/wf4500/Trash_bin/wf4500/access-om2’: Directory not empty
+find: cannot delete ‘/scratch/oz91/wf4500/Trash_bin/wf4500’: Directory not empty
+Loading conda/analysis3-25.09
+  Loading requirement: singularity
+Currently Loaded Modulefiles:
+ 1) nci-scripts/0.1   3) conda/analysis3-25.09(analysis3:esmvaltool:ilamb)  
+ 2) singularity      

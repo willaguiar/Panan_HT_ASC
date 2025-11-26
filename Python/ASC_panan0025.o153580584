@@ -1,0 +1,13 @@
+
+======================================================================================
+                  Resource Usage on 2025-10-28 17:17:59:
+   Job Id:             153580584.gadi-pbs
+   Project:            ol01
+   Exit Status:        0
+   Service Units:      33.24
+   NCPUs Requested:    48                     NCPUs Used: 48              
+                                           CPU Time Used: 00:52:44        
+   Memory Requested:   1.44TB                Memory Used: 186.81GB        
+   Walltime requested: 01:00:00            Walltime Used: 00:13:51        
+   JobFS requested:    500.0MB                JobFS used: 1.77KB          
+======================================================================================

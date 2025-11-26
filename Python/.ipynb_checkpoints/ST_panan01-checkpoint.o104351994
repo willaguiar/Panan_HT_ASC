@@ -1,0 +1,62 @@
+
+Usage Report: Project=x77 Period=2023.q4
+=============================================================
+    Grant:    11.97 MSU
+     Used:    11.65 MSU
+ Reserved:    10.45 KSU
+    Avail:   310.88 KSU
+    
+
+Storage Usage Report: Project=x77
+=============================================================
+Filesystem        Used     iUsed    Allocation    iAllocation    
+massdata     268.44 TiB    1.22 M                            
+gdata4        54.03 TiB    4.93 M    64.77 TiB         9.83 M
+scratch2     102.91 TiB  292.23 K   119.00 TiB         7.90 M
+=============================================================
+        
+
+Usage Report: Project=g40 Period=2023.q4
+=============================================================
+    Grant:     3.00 MSU
+     Used:     2.96 MSU
+ Reserved:     1.13 KSU
+    Avail:    42.63 KSU
+    
+
+Storage Usage Report: Project=g40
+=============================================================
+Filesystem        Used     iUsed    Allocation    iAllocation    
+scratch2     738.44 MiB   17.89 K     1.07 TiB       255.00 K
+gdata5        15.43 TiB   32.48 K    26.23 TiB         2.21 M
+=============================================================
+        
+
+Usage Report: Project=oz91 Period=2023.q4
+=============================================================
+    Grant:     4.30 MSU
+     Used:     4.10 MSU
+ Reserved:    79.04 KSU
+    Avail:   118.25 KSU
+    
+
+Storage Usage Report: Project=oz91
+=============================================================
+Filesystem        Used     iUsed    Allocation    iAllocation    
+scratch1     114.41 TiB    1.27 M   120.00 TiB         7.95 M
+=============================================================
+        
+Job 104351994.gadi-pbs killed due to exceeding jobfs quota. Quota: 100.0MB, Used: 820.31MB, Host: gadi-cpu-bdw-0073
+
+======================================================================================
+                  Resource Usage on 2023-12-18 14:21:54:
+   Job Id:             104351994.gadi-pbs
+   Project:            g40
+   Exit Status:        271 (Linux Signal 15 SIGTERM Termination)
+   Service Units:      30.34
+   NCPUs Requested:    56                     NCPUs Used: 56              
+                                           CPU Time Used: 00:57:04        
+   Memory Requested:   512.0GB               Memory Used: 192.73GB        
+   Walltime requested: 03:30:00            Walltime Used: 00:08:32        
+   JobFS requested:    200.0MB                JobFS used: 1.03GB          
+======================================================================================

@@ -1,0 +1,33 @@
+2025-10-28 17:07:18,161 - distributed.worker.memory - WARNING - Worker is at 80% memory usage. Pausing worker.  Process memory: 24.54 GiB -- Worker memory limit: 30.62 GiB
+2025-10-28 17:07:19,302 - distributed.worker.memory - WARNING - Worker is at 71% memory usage. Resuming worker. Process memory: 22.04 GiB -- Worker memory limit: 30.62 GiB
+2025-10-28 17:09:26,310 - distributed.worker.memory - WARNING - Worker is at 80% memory usage. Pausing worker.  Process memory: 24.59 GiB -- Worker memory limit: 30.62 GiB
+2025-10-28 17:09:27,488 - distributed.worker.memory - WARNING - Worker is at 68% memory usage. Resuming worker. Process memory: 21.05 GiB -- Worker memory limit: 30.62 GiB
+2000-08-01
+2000-08-0131
+Start date =2000-08
+month2 is =09
+year2 is =2001
+End date =2000-09-01
+defining importing function
+importing coordinate transformation xarray
+Separating variables in transformation dataset
+importing U and V
+Output imported for : 
+<xarray.DataArray 'time' (time: 1)> Size: 8B
+array([cftime.DatetimeNoLeap(2000, 8, 16, 12, 0, 0, 0, has_year_zero=True)],
+      dtype=object)
+Coordinates:
+  * time     (time) object 8B 2000-08-16 12:00:00
+Attributes:
+    long_name:      time
+    axis:           T
+    calendar_type:  NOLEAP
+    bounds:         time_bnds
+Interpolating u and v to the same q point for rotation
+Rotating into along slope velocities
+Masking off regions away from the 2 chosen isobaths
+defining the coordinate transposition function
+defining bins for zonal and meridional distances
+Converting the coordinate system to along and cross-isobath
+saving data
+Finished successful

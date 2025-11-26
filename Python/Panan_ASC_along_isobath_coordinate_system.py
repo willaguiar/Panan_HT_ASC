@@ -1,0 +1,233 @@
+# # Compute monthly ASC along contour and save
+import intake
+import matplotlib.pyplot as plt
+import numpy as np
+import netCDF4 as nc
+import cartopy.crs as ccrs
+import xarray as xr
+import cmocean as cm
+import glob
+import os
+import sys
+import matplotlib.colors as col
+import cf_xarray as cf
+# need to install opencv-python for this:
+import cv2
+import warnings
+import logging
+from geopy.distance import geodesic
+from scipy.ndimage import distance_transform_edt
+import scipy.ndimage as nd
+from scipy.interpolate import griddata
+from dask.distributed import Client
+
+if __name__ == '__main__':
+	client = Client(threads_per_worker = 1)
+	
+	catalog = intake.cat.access_nri
+	
+	files_dir =  '/g/data/ik11/users/wf4500/Project_panan/GH/Panan_HT_ASC/contours/'
+	#
+	#1000m isobaths
+	panan_1000m = np.load(files_dir + 'Antarctic_slope_contour_Panan005_1000m.npz')
+	#2000m isobaths
+	panan_2000m = np.load(files_dir + 'Antarctic_slope_contour_Panan005_Smoothedtopography_2000m.npz')
+	#700m isobaths
+	panan_700m = np.load(files_dir + 'Antarctic_slope_contour_Panan005_Smoothedtopography_700m.npz')
+	#650m isobaths
+	panan_650m = np.load(files_dir + 'Antarctic_slope_contour_Panan005_Smoothedtopography_650m.npz')
+	
+	
+	monthdays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	month = str(int(sys.argv[1]))
+	month = month.zfill(2)
+	year = str(sys.argv[2])
+	start_time=year+'-'+month  
+	#Start_time0 and end_time0 are for importing the daily transport, and it ahsthe number of days in the month
+	start_time0=year+'-'+month +'-01'     
+	end_time0=year+'-'+month +'-01' + str(monthdays[int(int(sys.argv[1])-1)])
+	print(start_time0) 
+	print(end_time0) 
+	exp = 'panant-005-zstar-ACCESSyr2'
+	
+	print("Start date =" + start_time) 
+	year2=str(int(start_time[0:4])+1)
+	month2=str(int(start_time[5:7])+1)
+	month2=str(int(month2))
+	month2 = month2.zfill(2)    
+	print("month2 is =" + month2) 
+	print("year2 is =" + str(year2))     
+	
+	imon = int(sys.argv[1])
+	if imon <12:
+		end_time=year+'-'+month2+'-01'
+	else:
+		end_time=year2+'-01-01'
+	
+	
+	print("End date =" + end_time) 
+	
+	time_period = str(int(start_time[:4]))+'-'+str(int(end_time[:4]))
+	lat_range = slice(-90,-59)
+	
+	
+	print('defining importing function')
+	#in this definition, no frequency can be used only for static data
+	def importer(experiment,catalog,variable, frequency = 'fx',start_time=0,end_time=0):
+		warnings.filterwarnings('ignore')
+		var = catalog[experiment].search(variable=variable, frequency = frequency).to_dask(xarray_open_kwargs={'decode_timedelta':True})
+		if start_time!=0:
+			time_slice='slice(start_time,end_time)'
+			return eval("var." + variable + ".sel(time=" + time_slice + ")")
+		elif start_time ==0:
+			return eval("var." + variable)
+	
+	ilat_range = slice(0,panan_1000m['contour_masked_above'].shape[0])
+	depth  = importer(exp,catalog,"deptho").compute()
+	yh = depth.yh.isel(yh=ilat_range)
+	xh = depth.xh
+	depth_cut = depth.isel(yh=ilat_range)
+	
+	
+	
+	#transforming into xarrays - 1000m isobath
+	xr_panan_1000m = depth_cut.copy()
+	xr_panan_1000m.values = np.where(panan_1000m['contour_masked_above']>0,panan_1000m['contour_masked_above'],np.nan)
+	xr_panan_1000m.name='1000misobath'
+	#transformin into xarrays - 700m isobath
+	xr_panan_700m = depth_cut.copy()
+	xr_panan_700m.values = np.where(panan_700m['contour_masked_above']>0,panan_700m['contour_masked_above'],np.nan)
+	xr_panan_700m.name='700misobath'
+	#transformin into xarrays - 650m isobath
+	xr_panan_650m = depth_cut.copy()
+	xr_panan_650m.values = np.where(panan_650m['contour_masked_above']>0,panan_650m['contour_masked_above'],np.nan)
+	xr_panan_650m.name='650misobath'
+	
+	#transformin into xarrays - 2000m isobath
+	xr_panan_2000m = depth_cut.copy()
+	xr_panan_2000m.values = np.where(panan_2000m['contour_masked_above']>0,panan_2000m['contour_masked_above'],np.nan)
+	xr_panan_2000m.name='2000misobath'
+	
+	
+	
+	
+	
+	print('importing coordinate transformation xarray')
+	transf_dir = '/home/156/wf4500/v45_wf4500/Project_panan/GH/Panan_HT_ASC/contours/'
+	dataset_for_transpostion = xr.open_dataset(transf_dir + 'Panan005_slope_coordinate_system_650mto2000m.nc')
+	print('Separating variables in transformation dataset')
+	dhu_dy = dataset_for_transpostion.dhu_dy
+	dhu_dx = dataset_for_transpostion.dhu_dx
+	slope = dataset_for_transpostion.slope
+	
+	
+	
+	print('importing U and V')
+#importing Us in various depths
+	depth_slice=slice(0,4000)
+	time_value = importer(exp,catalog,"uo",frequency='1mon',start_time=start_time,end_time=end_time).time.compute()
+	print('Output imported for : ')
+	print(time_value)
+	Us  = importer(exp,catalog,"uo",frequency='1mon',start_time=start_time,end_time=end_time).sel(z_l=depth_slice).mean('time').compute()
+	Vs  = importer(exp,catalog,"vo",frequency='1mon',start_time=start_time,end_time=end_time).sel(z_l=depth_slice).mean('time').compute()
+	
+	print('Interpolating u and v to the same q point for rotation')
+	Vs_onq = Vs.interp(xh = Us.xq).drop(('xh'))
+	Us_onq = Us.interp(yh = Vs.yq).drop(('yh'))
+	
+	
+	print('Rotating into along slope velocities')
+	U_along_ug = (Us_onq *dhu_dy/slope) - (Vs_onq*dhu_dx/slope)
+	
+	
+	print('Masking off regions away from the 2 chosen isobaths')
+	Ualong_masked = U_along_ug*dataset_for_transpostion.Mask
+	
+	print('defining the coordinate transposition function')
+	
+	def regrid_to_curvilinear_3D(Speed, x_new, y_new, nx_bins=100, ny_bins=100):
+		# --- Handle 2D or 3D input
+		is_3d = 'z_l' in Speed.dims
+		if is_3d:
+			z_dim = 'z_l'
+			nz = Speed.sizes[z_dim]
+		else:
+			nz = 1
+			Speed = Speed.expand_dims({'z_l': [0]})
+		
+		# Flatten coordinate arrays (2D)
+		x_flat = x_new.values.ravel()
+		y_flat = y_new.values.ravel()
+		
+		# Define bin edges and centers
+		x_edges = np.linspace(np.nanmin(x_flat), np.nanmax(x_flat), nx_bins + 1)
+		y_edges = np.linspace(np.nanmin(y_flat), np.nanmax(y_flat), ny_bins + 1)
+		x_centers = 0.5 * (x_edges[:-1] + x_edges[1:])
+		y_centers = 0.5 * (y_edges[:-1] + y_edges[1:])
+	
+		# Preallocate output
+		regridded_3d = np.full((nz, nx_bins, ny_bins), np.nan)
+		
+		# --- Loop over vertical levels
+		for k in range(nz):
+			Speed_k = Speed.isel(z_l=k).values.ravel()
+			mask = ~np.isnan(Speed_k)
+			x_valid = x_flat[mask]
+			y_valid = y_flat[mask]
+			Speed_valid = Speed_k[mask]
+			
+			# Digitize coordinates into bins
+			x_idx = np.digitize(x_valid, x_edges) - 1
+			y_idx = np.digitize(y_valid, y_edges) - 1
+			
+			# Initialize accumulation arrays
+			accum = np.zeros((nx_bins, ny_bins))
+			counts = np.zeros((nx_bins, ny_bins))
+			
+			# Accumulate values
+			for xi, yi, val in zip(x_idx, y_idx, Speed_valid):
+				if 0 <= xi < nx_bins and 0 <= yi < ny_bins:
+					accum[xi, yi] += val
+					counts[xi, yi] += 1
+			
+			# Compute mean in each bin
+			with np.errstate(invalid='ignore'):
+				layer_avg = np.where(counts > 0, accum / counts, np.nan)
+			regridded_3d[k, :, :] = layer_avg
+		
+		# --- Convert to xarray
+		if is_3d:
+			regridded = xr.DataArray(
+				regridded_3d,
+				dims=[z_dim, 'x_bin', 'y_bin'],
+				coords={z_dim: Speed[z_dim], 'x_bin': x_centers, 'y_bin': y_centers},
+				name=f"{Speed.name}_regridded" if Speed.name else "regridded")
+		else:
+			regridded = xr.DataArray(
+				regridded_3d[0],
+				dims=['x_bin', 'y_bin'],
+				coords={'x_bin': x_centers, 'y_bin': y_centers},
+				name=f"{Speed.name}_regridded" if Speed.name else "regridded")
+		return regridded, x_centers, y_centers
+	
+	
+	print('defining bins for zonal and meridional distances')
+	zonal_nbins = 1440
+	meridional_nbins =50
+	
+	print('Converting the coordinate system to along and cross-isobath')
+	Us_along_regridded_3d,xnew,ynew = regrid_to_curvilinear_3D(Ualong_masked*dataset_for_transpostion.Mask.fillna(1), dataset_for_transpostion.Along_distances,dataset_for_transpostion.Cross_distances, nx_bins=zonal_nbins, ny_bins=meridional_nbins)
+	Us_along_regridded_3d = Us_along_regridded_3d.transpose().interpolate_na(dim='y_bin', method='linear') 
+	Us_along_regridded_3d.name = 'U_along'
+	
+	
+	print('saving data')
+	save_dir  = '/g/data/ik11/users/wf4500/Project_panan/ASC_speeds/Panan005/Ant_slope_current_between_isobaths_'+ start_time+'.nc'
+	
+	
+	# Us_along_regridded_3d['time']=time_value.time.values
+	Us_along_regridded_3d = Us_along_regridded_3d.expand_dims(time=time_value.time.values)
+	Us_along_regridded_3d.to_netcdf(save_dir)
+	
+	print('Finished successful')
+	
