@@ -1,0 +1,79 @@
+{
+  "esmcat_version": "0.0.1",
+  "attributes": [
+    {
+      "column_name": "filename",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "path",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "file_id",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "frequency",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "start_date",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "end_date",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "variable",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "variable_long_name",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "variable_standard_name",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "variable_cell_methods",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "variable_units",
+      "vocabulary": ""
+    },
+    {
+      "column_name": "realm",
+      "vocabulary": ""
+    }
+  ],
+  "assets": {
+    "column_name": "path",
+    "format": "netcdf",
+    "format_column_name": null
+  },
+  "aggregation_control": {
+    "variable_column_name": "variable",
+    "groupby_attrs": [
+      "file_id"
+    ],
+    "aggregations": [
+      {
+        "type": "join_existing",
+        "attribute_name": "start_date",
+        "options": {
+          "dim": "time",
+          "combine": "by_coords"
+        }
+      }
+    ]
+  },
+  "id": "panan-005-zstar-2001rerun",
+  "description": "A branched re-run of Panan005 for the year 2001, with aditional heat budget and surface flux diagnostics",
+  "title": null,
+  "last_updated": "2025-12-02T05:17:09Z",
+  "catalog_file": "file:///g/data/ik11/users/wf4500/Project_panan/GH/Panan_HT_ASC/Jupyter/Intake_catalogs/panan-005-zstar-2001rerun.csv"
+}
